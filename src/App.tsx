@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { ethers } from 'ethers';
 import {
@@ -103,15 +103,6 @@ export default function App() {
   const [txHash, setTxHash] = useState('');
 
   /**
-   * A function that handles the change of the amount of money that the user wants to send.
-   * @param {any} event - any - This is the event that is triggered when the user types in the input
-   * field.
-   */
-  async function handleChangeAmount(event: any) {
-    setamountUser(event.target.value);
-  }
-
-  /**
    * It takes an event, finds the token that matches the event's value, and sets the receive address to
    * the token's address
    * @param {any} event - any - this is the event that is triggered when the user selects a token from
@@ -135,15 +126,6 @@ export default function App() {
     if (result) {
       setReceiveAddress(result.addr);
     }
-  }
-
-  /**
-   * A function that handles the change of the transaction hash.
-   * @param {any} event - any - this is the event that is triggered when the user types in the input
-   * field.
-   */
-  async function handleChangeTxHash(event: any) {
-    setTxHash(event.target.value);
   }
 
   /**
@@ -324,7 +306,8 @@ export default function App() {
               id="outlined-adornment-amount"
               startAdornment={<InputAdornment position="start">ETH</InputAdornment>}
               label="Amount to send"
-              onChange={handleChangeAmount}
+              // onChange={handleChangeAmount}
+              onChange={e => setamountUser(e.target.value)}
               defaultValue={defaultAmount}
               readOnly
             />
@@ -407,7 +390,7 @@ export default function App() {
                 id="outlined-adornment-amount"
                 startAdornment={<InputAdornment position="start">ETH</InputAdornment>}
                 label="Amount to send"
-                onChange={handleChangeAmount}
+                onChange={e => setamountUser(e.target.value)}
                 defaultValue={defaultAmount}
                 readOnly
               />
@@ -491,7 +474,7 @@ export default function App() {
               <OutlinedInput
                 id="outlined-adornment-amount"
                 label="Transaction hash"
-                onChange={handleChangeTxHash}
+                onChange={e => setTxHash(e.target.value)}
               />
           </FormControl>
 
