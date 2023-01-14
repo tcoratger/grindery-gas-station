@@ -136,6 +136,7 @@ export default function App() {
       throw new Error("No crypto wallet found. Please install it.");
     }
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
     const signer = provider.getSigner();
 
     const treasuryContract = new ethers.Contract(
@@ -162,6 +163,7 @@ export default function App() {
       throw new Error("No crypto wallet found. Please install it.");
     }
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
     const signer = provider.getSigner();
 
     const tx = await signer.sendTransaction({
@@ -187,6 +189,7 @@ export default function App() {
     const accounts = await window.ethereum.send("eth_requestAccounts");
     const accountUser = toChecksumAddress(accounts.result[0]);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []);
     const tx = await provider.getTransaction(txHash);
 
     if (
